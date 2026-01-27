@@ -1,0 +1,49 @@
+# Composer dependencies (never commit vendor in packages)
+vendor/
+
+# Composer lock file (usually not committed for libraries)
+composer.lock
+
+# Environment files
+.env
+.env.*.local
+
+# IDE / Editor settings
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PHPUnit / Pest cache
+.phpunit.result.cache
+.pest.cache/
+
+# PHP CS Fixer cache
+.php-cs-fixer.cache
+
+# Rector cache
+.rector.cache
+
+# PHPStan / Psalm cache
+phpstan.neon.dist.cache
+psalm.xml.cache
+
+# Coverage reports
+coverage/
+.clover.xml
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+*.phar
+
+# Temporary files
+/tmp/
+*.tmp
