@@ -14,4 +14,8 @@ class API
     public const PUSH_ORDER = '/v2orders';
     public const GET_ORDER = '/getorders';
 
+    public const MANIFEST = '/Createmanifest';
+
+    public const ONHOLD_ORDER = '/Onholdorders';
+    public const CANCEL_ORDER = '/Cancelorders';
 }

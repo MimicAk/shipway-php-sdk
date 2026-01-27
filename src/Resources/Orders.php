@@ -6,6 +6,11 @@ use MimicAk\ShipwayPhpSdk\Client\HttpClient;
 use MimicAk\ShipwayPhpSdk\Config\API;
 use MimicAk\ShipwayPhpSdk\Models\Order;
 use MimicAk\ShipwayPhpSdk\Exceptions\ValidationException;
+use MimicAk\ShipwayPhpSdk\Models\Request\ShipmentBooking\GetOrdersRequest;
+use MimicAk\ShipwayPhpSdk\Models\Request\ShipmentBooking\ManifestRequest;
+use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\GetOrdersResponse;
+use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\ManifestResponse;
+use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\OrderOperationResponse;
 use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\OrderResponse;
 
 /**
@@ -66,15 +71,50 @@ class Orders extends AbstractResource
 
 
     /**
-     * Get order by ID
+     * Get orders
      * 
-     * @param string $orderId The order ID
-     * @return array Order data
+     * @param GetOrdersRequest $request The request object containing order ID
+     * @return GetOrdersResponse Order data
      */
-    public function getById(string $orderId): array  // Renamed from get() to getById()
+    public function getOrders(GetOrdersRequest $request): GetOrdersResponse
     {
         $this->resourcePath = API::GET_ORDER;
-        return parent::get("");
+
+        $response = $this->get("", $request->toArray());
+
+        return GetOrdersResponse::fromArray($response);
+    }
+
+    /**
+     * Create Manifest for multiple orders
+     * @param ManifestRequest $orderIds
+     * @return ManifestResponse
+     */
+    public function createManifest(ManifestRequest $orderIds): ManifestResponse
+    {
+        $this->resourcePath = API::MANIFEST;
+
+        $response = $this->post($orderIds->toArray(), '');
+
+        return ManifestResponse::fromArray($response);
+    }
+
+    public function onHoldOrders(ManifestRequest $orderIds): OrderOperationResponse
+    {
+        $this->resourcePath = API::ONHOLD_ORDER;
+
+        $response = $this->post($orderIds->toArray(), '');
+
+        return OrderOperationResponse::fromArray($response);
+    }
+
+    public function cancelOrders(ManifestRequest $orderIds): OrderOperationResponse
+    {
+        $this->resourcePath = API::CANCEL_ORDER;
+
+        $response = $this->post($orderIds->toArray(), '');
+
+        return OrderOperationResponse::fromArray($response);
     }
 
     /**
