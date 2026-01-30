@@ -5,10 +5,7 @@ namespace MimicAk\ShipwayPhpSdk;
 use MimicAk\ShipwayPhpSdk\Client\HttpClient;
 use MimicAk\ShipwayPhpSdk\Config\Configuration;
 use MimicAk\ShipwayPhpSdk\Resources\Orders;
-use MimicAk\ShipwayPhpSdk\Resources\Shipments;
-use MimicAk\ShipwayPhpSdk\Resources\Tracking;
 use MimicAk\ShipwayPhpSdk\Resources\Courier;
-use MimicAk\ShipwayPhpSdk\Resources\Webhooks;
 
 /**
  * Main entry point for Shipway PHP SDK
@@ -76,16 +73,6 @@ class Shipway
         return $this->resources['orders'];
     }
 
-    /**
-     * Get Shipments resource
-     */
-    public function shipments(): Shipments
-    {
-        if (!isset($this->resources['shipments'])) {
-            $this->resources['shipments'] = new Shipments($this->httpClient);
-        }
-        return $this->resources['shipments'];
-    }
 
 
     /**
