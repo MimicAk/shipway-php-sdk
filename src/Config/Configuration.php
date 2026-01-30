@@ -17,7 +17,7 @@ class Configuration
     private ?string $partnerCode = null;
     private ?string $webhookSecret = null;
 
-    private const USER_AGENT = 'MimicAk-Shipway-PHP-SDK/1.0';
+    private const USER_AGENT = API::USER_AGENT;
 
     public function __construct(string $userEmail, string $apiKey)
     {

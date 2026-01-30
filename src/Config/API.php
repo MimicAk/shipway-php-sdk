@@ -20,4 +20,17 @@ class API
     public const CANCEL_ORDER = '/Cancelorders';
 
     public const CANCEL_SHIPMENT = '/Cancel';
+
+
+    // Carrier related endpoints
+    public const GET_CARRIERS = '/getcarrier';
+
+    public const PINCODE_SERVICEABILITY = '/pincodeserviceable';
+
+    public const SHIPWAY_CARRIER_RATES = '/getshipwaycarrierrates';
+
+
+    public const TRACKING = '/tracking';
+
+    public const TRACKING_BASE_URL = 'https://app.shipway.com/api' . self::TRACKING;
 }
