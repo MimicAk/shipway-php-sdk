@@ -40,6 +40,12 @@ class HttpClient
         $this->client = new Client($clientConfig);
     }
 
+    public function getConfig(): Configuration
+    {
+        return $this->config;
+    }
+
+
     private function getDefaultHeaders(): array
     {
         // Shipway API uses Basic HTTP authentication

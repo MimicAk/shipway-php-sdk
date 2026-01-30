@@ -12,6 +12,7 @@ use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\GetOrdersResponse;
 use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\ManifestResponse;
 use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\OrderOperationResponse;
 use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\OrderResponse;
+use MimicAk\ShipwayPhpSdk\Models\Response\ShipmentBooking\ShipmentCancelResponse;
 
 /**
  * Orders API resource for Shipway v2 API
@@ -117,50 +118,15 @@ class Orders extends AbstractResource
         return OrderOperationResponse::fromArray($response);
     }
 
-    /**
-     * Update an existing order
-     * 
-     * @param string $orderId The order ID
-     * @param array $data Update data
-     * @return array API response
-     */
-    public function update(string $orderId, array $data): array
+    public function cancelShipment(array $awbNumber): ShipmentCancelResponse
     {
-        return $this->put("/{$orderId}", $data);
+        $this->resourcePath = API::CANCEL_SHIPMENT;
+
+        $response = $this->post(['awb_number' => $awbNumber], '');
+
+        return ShipmentCancelResponse::fromArray($response);
     }
 
-    /**
-     * Cancel an order
-     * 
-     * @param string $orderId The order ID
-     * @return array API response
-     */
-    public function cancel(string $orderId): array
-    {
-        return $this->delete("/{$orderId}");
-    }
-
-    /**
-     * List orders with filters
-     * 
-     * @param array $filters Available filters:
-     *   - status: Order status
-     *   - from_date: From date (YYYY-MM-DD)
-     *   - to_date: To date (YYYY-MM-DD)
-     *   - courier: Courier name
-     * @param int $page Page number
-     * @param int $perPage Items per page
-     * @return array List of orders
-     */
-    public function list(array $filters = [], int $page = 1, int $perPage = 20): array
-    {
-        $query = array_merge($filters, [
-            'page' => $page,
-            'per_page' => $perPage,
-        ]);
-
-        return parent::get('', $query);
-    }
 
     /**
      * Validate order data before sending to API
@@ -219,49 +185,5 @@ class Orders extends AbstractResource
                 throw new ValidationException("Product price is required for product at index {$index}", 422);
             }
         }
-    }
-
-    /**
-     * Generate AWB for an order
-     * 
-     * @param string $orderId The order ID
-     * @return array API response with AWB details
-     */
-    public function generateAwb(string $orderId): array
-    {
-        return $this->post([], "/{$orderId}/generate-awb");
-    }
-
-    /**
-     * Get shipping label for an order
-     * 
-     * @param string $orderId The order ID
-     * @return array API response with label URL
-     */
-    public function getLabel(string $orderId): array
-    {
-        return parent::get("/{$orderId}/label");
-    }
-
-    /**
-     * Get manifest for multiple orders
-     * 
-     * @param array $orderIds Array of order IDs
-     * @return array API response with manifest URL
-     */
-    public function getManifest(array $orderIds): array
-    {
-        return $this->post(['order_ids' => $orderIds], '/manifest');
-    }
-
-    /**
-     * Get order by AWB number
-     * 
-     * @param string $awbNumber AWB tracking number
-     * @return array Order data
-     */
-    public function findByAwb(string $awbNumber): array
-    {
-        return parent::get("/awb/{$awbNumber}");
     }
 }

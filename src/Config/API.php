@@ -18,4 +18,6 @@ class API
 
     public const ONHOLD_ORDER = '/Onholdorders';
     public const CANCEL_ORDER = '/Cancelorders';
+
+    public const CANCEL_SHIPMENT = '/Cancel';
 }

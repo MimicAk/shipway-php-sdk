@@ -87,16 +87,6 @@ class Shipway
         return $this->resources['shipments'];
     }
 
-    /**
-     * Get Tracking resource
-     */
-    public function tracking(): Tracking
-    {
-        if (!isset($this->resources['tracking'])) {
-            $this->resources['tracking'] = new Tracking($this->httpClient);
-        }
-        return $this->resources['tracking'];
-    }
 
     /**
      * Get Courier resource
@@ -107,17 +97,6 @@ class Shipway
             $this->resources['courier'] = new Courier($this->httpClient);
         }
         return $this->resources['courier'];
-    }
-
-    /**
-     * Get Webhooks resource
-     */
-    public function webhooks(): Webhooks
-    {
-        if (!isset($this->resources['webhooks'])) {
-            $this->resources['webhooks'] = new Webhooks($this->httpClient);
-        }
-        return $this->resources['webhooks'];
     }
 
     /**
