@@ -11,7 +11,7 @@ This SDK is designed as a **Composer package**, following PSR-4 autoloading and 
 Install via Composer:
 
 ```bash
-composer require mimacak/shipway-php-sdk
+composer require mimicak/shipway-php-sdk
 ````
 
 Or include it manually by adding it to your `composer.json`.
