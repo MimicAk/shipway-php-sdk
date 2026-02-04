@@ -4,6 +4,7 @@ namespace MimicAk\ShipwayPhpSdk\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use MimicAk\ShipwayPhpSdk\Config\API;
 use MimicAk\ShipwayPhpSdk\Exceptions\ExceptionFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -54,7 +55,7 @@ class HttpClient
             'Authorization' => 'Basic ' . $this->config->getToken(),
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'User-Agent' => Configuration::USER_AGENT,
+            'User-Agent' => API::USER_AGENT,
         ];
 
         if ($this->config->getPartnerCode()) {
