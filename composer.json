@@ -9,6 +9,9 @@
         "api",
         "sdk"
     ],
+
+
+
     "require": {
         "guzzlehttp/guzzle": "^7.10",
         "psr/http-client": "^1.0",
@@ -37,7 +40,7 @@
             "email": "dev@codeingil.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/phpunit",
