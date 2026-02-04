@@ -16,7 +16,7 @@ class Courier extends AbstractResource
 {
     public function __construct(HttpClient $httpClient)
     {
-        parent::__construct($httpClient, '');
+        parent::__construct($httpClient, 'api');
     }
 
     /**
@@ -46,8 +46,8 @@ class Courier extends AbstractResource
      */
     public function getPincodeAvailability(string $pincode, string $paymentType = ''): PincodeAvailabilityResponse
     {
-        $this->resourcePath = API::PINCODE_SERVICEABILITY;
-        $response = $this->get('', ['pincode' => $pincode, 'payment_type' => $paymentType]);
+        // $this->resourcePath = API::PINCODE_SERVICEABILITY;
+        $response = $this->get(API::PINCODE_SERVICEABILITY, ['pincode' => $pincode, 'payment_type' => $paymentType]);
         return PincodeAvailabilityResponse::fromArray($response);
     }
 
@@ -58,8 +58,8 @@ class Courier extends AbstractResource
      */
     public function getCarrierRates(GetCarrierRates $data): GetCarrierRatesResponse
     {
-        $this->resourcePath = 'api/' . API::SHIPWAY_CARRIER_RATES;
-        $response = $this->get('', $data->toArray());
+        // $this->resourcePath = API::SHIPWAY_CARRIER_RATES;
+        $response = $this->get(API::SHIPWAY_CARRIER_RATES, $data->toArray());
 
         // return $response;
         // var_dump($response);
