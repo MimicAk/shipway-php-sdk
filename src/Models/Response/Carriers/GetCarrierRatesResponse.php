@@ -32,11 +32,13 @@ class GetCarrierRatesResponse
     {
         $response = new self();
 
+        // $data = $data['data'];
+
         $response->success = (bool) ($data['success'] ?? false);
 
         $response->carriers = array_map(function ($item) {
-
-            $item['courier_title'] = $item['courier_name'] ?? '';
+            $item['carrier_title'] = $item['courier_name'] ?? '';
+            $item['id'] = $item['carrier_id'] ?? '';
 
             return CarrierResponse::fromArray($item);
         }, $data['rate_card'] ?? []);

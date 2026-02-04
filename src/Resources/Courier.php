@@ -58,8 +58,11 @@ class Courier extends AbstractResource
      */
     public function getCarrierRates(GetCarrierRates $data): GetCarrierRatesResponse
     {
-        $this->resourcePath = API::SHIPWAY_CARRIER_RATES;
+        $this->resourcePath = 'api/' . API::SHIPWAY_CARRIER_RATES;
         $response = $this->get('', $data->toArray());
+
+        // return $response;
+        // var_dump($response);
         return GetCarrierRatesResponse::fromArray($response);
     }
 

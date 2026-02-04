@@ -25,11 +25,18 @@ abstract class AbstractResource
     protected function get(string $endpoint = '', array $query = []): array
     {
         $uri = $this->resourcePath . $endpoint;
+
+
+        $query = array_filter($query, fn($v) => $v !== null);
+
         if (!empty($query)) {
             $uri .= '?' . http_build_query($query);
         }
 
+        // var_dump($uri);
         $response = $this->httpClient->request('GET', $uri);
+
+        // var_dump($response);
         return $this->responseHandler->handle($response);
     }
 

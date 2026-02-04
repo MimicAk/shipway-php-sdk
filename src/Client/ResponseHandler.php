@@ -37,13 +37,15 @@ class ResponseHandler
         // Shipway typically returns: {success: true, data: {...}, message: "..."}
         // or for errors: {success: false, message: "...", errors: [...]}
 
-        return [
-            'success' => $data['success'] ?? ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300),
-            'data' => $data['data'] ?? $data,
-            'message' => $data['message'] ?? null,
-            'meta' => $data['meta'] ?? $data['pagination'] ?? null,
-            'errors' => $data['errors'] ?? null,
-        ];
+        // return [
+        //     'success' => $data['success'] ?? ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300),
+        //     'data' => $data['data'] ?? $data,
+        //     'message' => $data['message'] ?? null,
+        //     'meta' => $data['meta'] ?? $data['pagination'] ?? null,
+        //     'errors' => $data['errors'] ?? null,
+        // ];
+
+        return $data;
     }
 
     /**

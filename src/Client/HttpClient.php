@@ -32,6 +32,7 @@ class HttpClient
             'base_uri' => $config->getBaseUrl(),
             'timeout' => $config->getTimeout(),
             'headers' => $this->getDefaultHeaders(),
+            'verify' => false,
         ];
 
         if ($config->getDebug()) {
@@ -79,6 +80,7 @@ class HttpClient
         while ($attempts <= $maxAttempts) {
             try {
                 $response = $this->client->request($method, $uri, $options);
+
                 $this->logResponse($response);
                 return $this->handleResponse($response);
             } catch (RequestException $e) {
@@ -136,7 +138,6 @@ class HttpClient
             $this->lastRequestMethod ?? null,
             $this->lastRequestData ?? null
         );
-
     }
 
     private function isRetryable(?ResponseInterface $response): bool
@@ -156,5 +157,10 @@ class HttpClient
         }
 
         return new ApiException($e->getMessage(), 0, $e);
+    }
+
+    public function getClient()
+    {
+        return $this->client;
     }
 }

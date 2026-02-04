@@ -13,7 +13,7 @@ class Configuration
     private string $baseUrl = 'https://app.shipway.com/api/';
     private int $timeout = 30;
     private int $retryAttempts = 3;
-    private bool $debug = false;
+    private bool $debug = true;
     private ?string $partnerCode = null;
     private ?string $webhookSecret = null;
 

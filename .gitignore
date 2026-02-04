@@ -49,3 +49,5 @@ build/
 *.tmp
 
 *.zip
+
+/local/
